@@ -1,13 +1,13 @@
 <p align="center">
   <a href="https://usersearch.com/product/onequery/">
-    <img src="docs/assets/usersearch-platform.png" alt="UserSearch — OneQuery" width="720">
+    <img src="docs/assets/usersearch-onequery-api.png" alt="UserSearch — OneQuery API" width="720">
   </a>
 </p>
 
 <h1 align="center">Search premium data sources with one API key.</h1>
 
 <p align="center">
-  The UserSearch OneQuery SDK for JavaScript and TypeScript.<br>
+  The UserSearch OneQuery API SDK for JavaScript and TypeScript.<br>
   Choose your providers, send a query, and get their results in a common format.
 </p>
 
@@ -67,7 +67,7 @@ Requires Node.js 22.13+ in the 22 series, or Node.js 24. Supports JavaScript and
 Install from GitHub:
 
 ```sh
-npm install git+https://github.com/UserSearch-Public/usersearch-sdk-js.git
+npm install git+https://github.com/UserSearch-Public/onequery-api.git
 ```
 
 The SDK is in beta and is not yet published to npm. Pin the Git URL to a commit for production deployments; see [releases](docs/releases.md).
@@ -215,7 +215,7 @@ See [timeouts, progress, and cancellation](docs/advanced.md#timeouts-progress-an
 - [Releases and compatibility](docs/releases.md) — installation, versioning, and supported runtimes.
 - [Contributing](.github/CONTRIBUTING.md) — development commands and test requirements.
 
-For SDK issues, [open an issue](https://github.com/UserSearch-Public/usersearch-sdk-js/issues/new) with the SDK version, Node.js version, error code, and request ID. Do not attach credentials, result keys, or personal search data.
+For SDK issues, [open an issue](https://github.com/UserSearch-Public/onequery-api/issues/new) with the SDK version, Node.js version, error code, and request ID. Do not attach credentials, result keys, or personal search data.
 
 ## Development
 
