@@ -8,7 +8,7 @@
 
 <p align="center">
   The UserSearch SDK for JavaScript and TypeScript.<br>
-  Search across your selected data providers and get their findings back together.
+  Search multiple data providers with one UserSearch API key.
 </p>
 
 <p align="center">
@@ -20,7 +20,7 @@
 
 ## 100+ sources. One integration.
 
-OneQuery brings together over 100 data sources through one UserSearch integration. Choose the providers available for your search type, pass your query, and get their findings back together.
+UserSearch OneQuery connects your application to over 100 data sources. Choose the providers you want to search using a single API key.
 
 This email example selects three providers:
 
@@ -38,13 +38,11 @@ const { data } = await client.search({
 console.log(data.results);
 ```
 
-**That is the integration.** One UserSearch key gives your application access to supported providers. Add or remove sources in the same request, and consume a shared result structure with source attribution.
-
-One SDK call handles submission and polling until the result is ready. You do not need to build a separate client for each provider.
+`search()` submits the query and waits for the results. Add or remove providers in `sources`; the SDK handles polling, and results retain their source attribution.
 
 ## How it works
 
-Your app sends one query. UserSearch asks your selected providers, brings their findings together, and returns a consistent result structure.
+UserSearch queries the selected providers and combines their responses into a common format.
 
 <p align="center">
   <a href="https://usersearch.com/product/onequery/">
@@ -52,25 +50,11 @@ Your app sends one query. UserSearch asks your selected providers, brings their 
   </a>
 </p>
 
-*OneQuery product illustration from [usersearch.com](https://usersearch.com/product/onequery/). For this SDK’s supported search types and providers, see [Choose your sources](#choose-your-sources); use the SDK example above for the actual request syntax.*
+*OneQuery product overview. See [Search types](#search-types) for current SDK support and use the code above for request syntax.*
 
-Searches use account credits. Provider availability depends on the search type and API configuration. [Estimate the cost](#check-the-cost-first) before submitting if needed.
+## Search types
 
-> **Private preview · v0.2.0-beta.1**
->
-> Available to repository collaborators. The package is not yet published to npm.
-
-## Built for your application
-
-- **Multiple sources per search** — select providers explicitly or let the API choose compatible defaults.
-- **Cost checks before submission** — validate input and retrieve an estimate without starting a search.
-- **Consistent results** — retain source attribution, partial results, and individual provider outcomes.
-- **Recoverable submissions** — retries reuse the same result and idempotency keys.
-- **JavaScript and TypeScript** — ES modules and CommonJS, with no runtime dependencies.
-
-### Search types
-
-The full [UserSearch search lineup](https://usersearch.com/product/onequery/), with availability in this SDK:
+SDK support for the [UserSearch search types](https://usersearch.com/product/onequery/):
 
 | Search type | Input | SDK status |
 | --- | --- | --- |
@@ -93,19 +77,19 @@ The full [UserSearch search lineup](https://usersearch.com/product/onequery/), w
 | Breach Exposure | To be announced | Coming soon |
 | Court Records | To be announced | Coming soon |
 
-Coming-soon types are not yet accepted by this SDK. Their input formats will be documented when support is released.
-
-**Runtime:** Node.js 22.13+ in the 22 series, or Node.js 24. Tested on Windows and Linux. This is a server-side SDK; browser use is not supported.
+Input formats for upcoming search types will be documented when they are released.
 
 ## Installation
 
-Install from the private GitHub repository using an account with access:
+Requires Node.js 22.13+ in the 22 series, or Node.js 24. Supports JavaScript and TypeScript, ES modules and CommonJS. Use it on your server, where your API key stays private.
+
+Install from GitHub:
 
 ```sh
 npm install git+https://github.com/UserSearch-Public/usersearch-sdk-js.git
 ```
 
-For reproducible deployments, pin the Git URL to a reviewed commit or install a versioned tarball. See [installation and releases](docs/releases.md).
+The SDK is in beta and is not yet published to npm. Pin the Git URL to a commit for production deployments; see [releases](docs/releases.md).
 
 Before making API calls, activate your UserSearch API key, register your server’s outbound IP, and set `USERSEARCH_API_KEY` in the server environment.
 
@@ -117,17 +101,17 @@ For CommonJS:
 const { UserSearch } = require('usersearch-sdk');
 ```
 
-**Try it without an API key:** clone this repository, run `npm ci`, then `npm run demo`. The [simulated demo](examples/demo.mjs) shows multiple sources, a partial failure, encrypted saving, and recovery without network calls or charges.
+To try it without an API key, clone the repository and run `npm ci` followed by `npm run demo`. The [demo](examples/demo.mjs) uses simulated responses and spends no credits.
 
 ## Choose your sources
 
-Use a single provider or several with the same method. For example, the email search above queries Predicta, Epieos, and OSINT Industries together. Omit `sources` to use the API’s defaults for your search type; an empty list is rejected.
+Pass provider names in `sources`, as in the example above. Omit `sources` to use the API’s defaults for your search type. An empty list is rejected.
 
-The current SDK supports **username, email, phone, and image** searches. See the [API reference](https://public-api.usersearch.ai/docs/) for supported provider combinations and current availability.
+Available providers depend on the search type. Check the [API reference](https://public-api.usersearch.ai/docs/) for supported combinations.
 
 ## Check the cost first
 
-Cost estimation is optional and does not start a search. Using the same `client`:
+Searches use account credits. You can check the estimated cost without starting a search:
 
 ```js
 const input = {
@@ -154,11 +138,9 @@ Network methods return `{ data, meta }`:
 | `meta.status` | HTTP response status |
 | `meta.retryAfterMs` | Suggested retry delay in milliseconds, or `null` |
 
-One source failing does not discard another source’s findings. Inspect `data.sources` as well as the overall search status. Search results are returned normally even when every source fails.
+Check `data.sources` for individual provider failures, even when the request succeeds. Results from successful providers are kept if another provider fails. A response can also contain failures from every provider.
 
-> **Results are delivered once.**
->
-> Save the terminal response when you receive it. The SDK caches it on the search handle; optional [encrypted storage and job recovery](docs/advanced.md#encrypted-storage) preserve results across application restarts.
+Save results when you receive them: the API delivers them once. The SDK caches the final response on the search handle. Use [encrypted storage](docs/advanced.md#encrypted-storage) to keep it across restarts.
 
 ## Client methods
 
@@ -171,8 +153,6 @@ One source failing does not discard another source’s findings. Inspect `data.s
 | `prepare(input)` → `submit(prepared)` | Control submission and preserve retry credentials |
 | `results(handle)` / `wait(handle)` | Collect once or poll until the search finishes |
 | `runJob(jobId, input, options)` | Start or resume a job using configured persistent storage |
-
-Omit `sources` to use API defaults. An empty source list is rejected. Provider availability and accepted image constraints are determined by the API.
 
 ## Errors and configuration
 
@@ -193,9 +173,9 @@ try {
 }
 ```
 
-Errors expose a machine-readable code, request ID, charge state, and an actionable hint. Specific classes distinguish authentication, permissions, invalid input, rate limits, API failures, connection errors, and uncertain result delivery.
+Errors include a code, request ID, charge state, and a hint about what to do next. `error.toJSON()` omits credentials.
 
-Retries preserve submission identity and honor `Retry-After`. An ambiguous result-collection failure is never retried automatically because the API may already have delivered and deleted the response.
+Submission retries reuse the same keys and respect `Retry-After`. If result delivery is uncertain, the SDK stops rather than retrying a response the API may have already deleted.
 
 See [timeouts, progress, and cancellation](docs/advanced.md#timeouts-progress-and-cancellation) for request overrides and polling controls.
 
@@ -222,4 +202,4 @@ Verification covers runtime tests, TypeScript consumers, and installed-package i
 
 ## License
 
-Proprietary — `UNLICENSED`. This private preview does not grant an open-source license.
+Proprietary (`UNLICENSED`). Public access to this repository does not grant an open-source license.
