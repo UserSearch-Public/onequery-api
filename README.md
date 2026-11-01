@@ -68,12 +68,32 @@ Searches use account credits. Provider availability depends on the search type a
 - **Recoverable submissions** — retries reuse the same result and idempotency keys.
 - **JavaScript and TypeScript** — ES modules and CommonJS, with no runtime dependencies.
 
-| Search type | Input |
-| --- | --- |
-| Username | A username or handle |
-| Email | An email address |
-| Phone | A number with an international country code, such as `+442079460000` |
-| Image | A supported image encoded as a base64 data URI |
+### Search types
+
+The full [UserSearch search lineup](https://usersearch.com/product/onequery/), with availability in this SDK:
+
+| Search type | Input | SDK status |
+| --- | --- | --- |
+| Username Intelligence | A username or handle | Available |
+| Email Intelligence | An email address | Available |
+| Phone Intelligence | A number with an international country code, such as `+442079460000` | Available |
+| Picture / Image | A supported image encoded as a base64 data URI | Available |
+| People Intelligence | To be announced | Coming soon |
+| Corporate Intelligence | To be announced | Coming soon |
+| Cyber Intelligence | To be announced | Coming soon |
+| IP Intelligence | To be announced | Coming soon |
+| Product Intelligence | To be announced | Coming soon |
+| Chat Messaging | To be announced | Coming soon |
+| Public Forums | To be announced | Coming soon |
+| Cryptocurrency | To be announced | Coming soon |
+| Vehicle Lookup | To be announced | Coming soon |
+| Threat Intelligence | To be announced | Coming soon |
+| Wireless Device | To be announced | Coming soon |
+| Domain Intelligence | To be announced | Coming soon |
+| Breach Exposure | To be announced | Coming soon |
+| Court Records | To be announced | Coming soon |
+
+Coming-soon types are not yet accepted by this SDK. Their input formats will be documented when support is released.
 
 **Runtime:** Node.js 22.13+ in the 22 series, or Node.js 24. Tested on Windows and Linux. This is a server-side SDK; browser use is not supported.
 
