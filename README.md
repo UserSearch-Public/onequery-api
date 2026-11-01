@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://usersearch.com/product/onequery/">
-    <img src="docs/assets/usersearch-onequery-api.png" alt="UserSearch — OneQuery API" width="720">
+    <img src="docs/assets/usersearch-onequery-api.png" alt="UserSearch — OneQuery API" width="625">
   </a>
 </p>
 

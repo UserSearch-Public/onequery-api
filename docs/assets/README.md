@@ -13,8 +13,12 @@ Downloaded or captured on 2026-11-01. The original artwork is unchanged. The thr
 
 ## OneQuery API banner
 
-`usersearch-onequery-api.png` is the README banner, adapted from `usersearch-platform.png` using the built-in image generation tool on 2026-11-01. It is a brand asset excluded from the MIT licence on the same terms as the original logo.
+`usersearch-onequery-api.png` is the README banner, adapted from `usersearch-platform.png` using the built-in image generation tool on 2026-11-01. The current revision uses a smaller blue product name and a tighter canvas. Its README display width preserves approximately the previous visible UserSearch wordmark size while reducing the overall banner height. It is a brand asset excluded from the MIT licence on the same terms as the original logo.
 
-Prompt used:
+Initial prompt:
 
 > Edit this existing UserSearch logo banner for the OneQuery API GitHub README. Preserve the existing orange logo symbol and USERSEARCH wordmark, spelling and white/orange colours. Add exactly "OneQuery API" as a second line below the USERSEARCH wordmark, centred, in a clean modern sans-serif font, white with API in the existing orange. Keep the flat near-black background. Professional minimal brand lockup, crisp text, ample but not excessive spacing. No extra slogans, decoration, gradients or additional text. Wide landscape banner.
+
+Revision prompt:
+
+> Edit this exact banner. Keep the USERSEARCH wordmark and orange symbol unchanged in design, colours and size: the full symbol-plus-wordmark should remain approximately 1160 pixels wide, as in the reference. Make the secondary text "OneQuery API" much smaller, approximately 42 pixels high (less than half the main wordmark letter height), in a single muted light blue colour #8CB9D9, centred beneath the main logo with a 30 pixel gap. Remove the excessive black padding by using a tightly framed wide canvas approximately 1280 by 432 pixels. Preserve the main logo size; trim the canvas rather than enlarging or shrinking the logo. Flat near-black background. Compact professional logo lockup. No additional words, decorations or effects.
