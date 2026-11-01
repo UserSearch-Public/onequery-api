@@ -1,0 +1,6 @@
+{
+  "url": "https://public-api.usersearch.ai/docs/openapi.yaml",
+  "sha256": "2062f13216f4102d29287f6978e4061628128f7f9363be046c38262f974ceb4b",
+  "normalization": "LF line endings; replace public API origin with __API_ORIGIN__",
+  "purpose": "Live specification reviewed after merged PR #28 on 2026-10-30; regression tests cover health JSON, keyless 202, first-poll delay and result field changes. Detects subsequent edits, not semantic compatibility."
+}
