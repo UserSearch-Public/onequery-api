@@ -12,7 +12,7 @@ Supported and tested runtimes: Node 22.13+ in the 22 series, and Node 24, on Win
 4. After merging the reviewed change, manually run Prepare private prerelease in Actions. It produces a tarball artifact with a 14-day retention period. Artifact access follows repository permissions.
 5. Download/install the tarball in an internal application. Record the version and commit used. A GitHub tag/release can be created when the maintainer chooses to announce it.
 
-The workflow does not tag, publish to npm, or change repository visibility. The `private: true` setting in package.json prevents accidental npm publication; it does not control GitHub visibility. The package is proprietary (`UNLICENSED`). Publishing to npm requires package ownership, licensing and publishing configuration to be agreed first.
+The workflow does not tag, publish to npm, or change repository visibility. The `private: true` setting in package.json prevents accidental npm publication; it does not control GitHub visibility. The SDK uses the [MIT licence](../LICENSE), with [brand assets](assets/README.md) handled separately. Publishing to npm requires package ownership and publishing configuration to be agreed first.
 
 ## Maintenance
 

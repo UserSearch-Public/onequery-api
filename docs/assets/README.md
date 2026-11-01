@@ -9,4 +9,4 @@ These assets are copied from the official [UserSearch OneQuery page](https://use
 
 - `onequery-how-it-works.png`: a 2× resolution browser capture of the original `.oq-flow` diagram under “How it works” on the OneQuery page. The page renders the diagram using HTML/CSS; it is captured as a PNG for GitHub. This is a product illustration, not the SDK API contract.
 
-Downloaded or captured on 2026-11-01. The original artwork is unchanged. UserSearch branding remains the property of UserSearch; provider marks belong to their respective owners. This repository does not grant a separate trademark license.
+Downloaded or captured on 2026-11-01. The original artwork is unchanged. The three PNG files listed above (logos and website imagery) are excluded from the SDK’s MIT licence. UserSearch branding remains the property of UserSearch; provider marks belong to their respective owners. No trademark rights are granted. The repository-native `badge-*.svg` files are covered by the SDK’s MIT licence.

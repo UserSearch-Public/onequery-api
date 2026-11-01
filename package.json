@@ -3,7 +3,7 @@
   "version": "0.2.0-beta.1",
   "private": true,
   "description": "Server-side JavaScript and TypeScript SDK for the UserSearch API",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": { "type": "git", "url": "git+https://github.com/UserSearch-Public/usersearch-sdk-js.git" },
   "bugs": { "url": "https://github.com/UserSearch-Public/usersearch-sdk-js/issues" },
   "type": "module",

@@ -229,4 +229,6 @@ Verification covers runtime tests, TypeScript consumers, and installed-package i
 
 ## License
 
-Proprietary (`UNLICENSED`). Public access to this repository does not grant an open-source license.
+The SDK code and documentation are licensed under [MIT](LICENSE). API access remains subject to UserSearch’s service terms and usage charges.
+
+Logos and website imagery are excluded from the MIT licence; see [brand assets](docs/assets/README.md). No trademark rights are granted.
