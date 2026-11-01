@@ -7,7 +7,7 @@ Supported and tested runtimes: Node 22.13+ in the 22 series, and Node 24, on Win
 ## Prepare a private prerelease
 
 1. Review the deployed API contract and update its fingerprint only after compatibility tests pass.
-2. Update package.json, version.js, package-lock.json and CHANGELOG.md together.
+2. Update package.json, src/version.js, package-lock.json and docs/CHANGELOG.md together.
 3. Run npm ci and npm run verify; require green GitHub CI on the change.
 4. After merging the reviewed change, manually run Prepare private prerelease in Actions. It produces a private tarball artifact with a 14-day retention period.
 5. Download/install the tarball in an internal application. Record the version and commit used. A GitHub tag/release can be created when the maintainer chooses to announce it.

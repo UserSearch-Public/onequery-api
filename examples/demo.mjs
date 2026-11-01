@@ -1,4 +1,4 @@
-import { UserSearch, EncryptedFileStore, SearchHandle } from '../index.js';
+import { UserSearch, EncryptedFileStore, SearchHandle } from 'usersearch-sdk';
 import { randomBytes } from 'node:crypto';
 import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

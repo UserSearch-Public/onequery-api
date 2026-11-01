@@ -1,4 +1,4 @@
-import { UserSearch } from '../index.js';
+import { UserSearch } from 'usersearch-sdk';
 
 // Set USERSEARCH_API_KEY in the server environment before running.
 // This example only reads the balance; it does not submit a search.

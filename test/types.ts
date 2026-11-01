@@ -1,5 +1,5 @@
-import { UserSearch, EncryptedFileStore, type Account, type Breach, type ImageMatch, type ImageLocation } from '../index.js';
-import type { SeenValue } from '../index.js';
+import { UserSearch, EncryptedFileStore, type Account, type Breach, type ImageMatch, type ImageLocation } from 'usersearch-sdk';
+import type { SeenValue } from 'usersearch-sdk';
 async function compileOnly() {
 const client = new UserSearch({ apiKey: 'synthetic', fetch: async () => { throw new Error('Compile-only fixture'); }, resultStore: new EncryptedFileStore({ directory: './results', encryptionKey: new Uint8Array(32) }) });
 const result = await client.search({ type: 'email', value: 'person@example.com', sources: ['predicta'] });

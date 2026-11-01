@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import UserSearch, { VERSION, UserSearchError, AuthenticationError, PermissionError, InvalidRequestError, RateLimitError, APIError, ConnectionError, DeliveryUncertainError } from '../index.js';
+import UserSearch, { VERSION, UserSearchError, AuthenticationError, PermissionError, InvalidRequestError, RateLimitError, APIError, ConnectionError, DeliveryUncertainError } from 'usersearch-sdk';
 const ref = '5f0c7a3e-1b2d-4c3e-8f40-9a1b2c3d4e5f';
 const json = (data, status = 200, headers = {}) => new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json', ...headers } });
 

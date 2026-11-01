@@ -170,6 +170,6 @@ Health reports describe prior API observations; they are not fresh provider prob
 
 `npm run verify` checks runtime behavior, TypeScript usage, and installed packages with synthetic data. `npm run demo` requires no API key and makes no network requests.
 
-`npm run check:contract` fetches only the public OpenAPI document and compares its normalized fingerprint with `contract-baseline.json`. It detects prose changes as well as contract changes. Review the updated specification and compatibility tests before changing the baseline.
+`npm run check:contract` fetches only the public OpenAPI document and compares its normalized fingerprint with `scripts/contract-baseline.json`. It detects prose changes as well as contract changes. Review the updated specification and compatibility tests before changing the baseline.
 
 See [releases and compatibility](releases.md) for supported runtimes and versioning.

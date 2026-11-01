@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from 'node:http';
 import { once } from 'node:events';
-import { UserSearch, PreparedSearch, SearchHandle } from '../index.js';
+import { UserSearch, PreparedSearch, SearchHandle } from 'usersearch-sdk';
 
 const ref = '5f0c7a3e-1b2d-4c3e-8f40-9a1b2c3d4e5f';
 const key = Buffer.alloc(32, 7).toString('base64url');

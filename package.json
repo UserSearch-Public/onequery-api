@@ -7,10 +7,10 @@
   "repository": { "type": "git", "url": "git+https://github.com/UserSearch-Public/usersearch-sdk-js.git" },
   "bugs": { "url": "https://github.com/UserSearch-Public/usersearch-sdk-js/issues" },
   "type": "module",
-  "exports": { ".": { "types": "./index.d.ts", "import": "./index.js", "require": "./index.js" }, "./storage": { "types": "./store.d.ts", "import": "./store.js", "require": "./store.js" } },
-  "types": "./index.d.ts",
-  "files": ["index.js", "index.d.ts", "errors.js", "version.js", "store.js", "store.d.ts", "findings.d.ts", "README.md", "CHANGELOG.md", "docs/"],
+  "exports": { ".": { "types": "./src/index.d.ts", "import": "./src/index.js", "require": "./src/index.js" }, "./storage": { "types": "./src/store.d.ts", "import": "./src/store.js", "require": "./src/store.js" } },
+  "types": "./src/index.d.ts",
+  "files": ["src/", "README.md", "docs/"],
   "engines": { "node": ">=22.13.0" },
-  "scripts": { "test": "node --test test/sdk.test.js test/recovery.test.js test/jobs.test.js test/conventions.test.js", "check": "node --check index.js && node --check store.js && node --check errors.js", "test:types": "tsc --noEmit --strict --module NodeNext --target ES2022 test/types.ts test/commonjs.cts", "demo": "node examples/demo.mjs", "check:contract": "node scripts/check-contract.mjs", "test:package": "node scripts/package-smoke.mjs", "verify": "npm run check && npm test && npm run test:types && npm run test:package" },
+  "scripts": { "test": "node --test test/sdk.test.js test/recovery.test.js test/jobs.test.js test/conventions.test.js", "check": "node --check src/index.js && node --check src/store.js && node --check src/errors.js", "test:types": "tsc --noEmit --strict --module NodeNext --target ES2022 test/types.ts test/commonjs.cts", "demo": "node examples/demo.mjs", "check:contract": "node scripts/check-contract.mjs", "test:package": "node scripts/package-smoke.mjs", "verify": "npm run check && npm test && npm run test:types && npm run test:package" },
   "devDependencies": { "typescript": "^5.9.3" }
 }

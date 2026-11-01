@@ -9,4 +9,4 @@
 
 The demo covers cost estimation, two sources with different outcomes, polling, encrypted storage, and recovery. It creates encrypted synthetic files in a temporary directory and prints their location. Its temporary encryption key is discarded when the process exits.
 
-For live integrations, use the [quick start](../README.md#quick-start) and [advanced usage](../docs/advanced.md). Keep API credentials in the server environment and use a persistent secret-manager key when enabling encrypted storage.
+For live integrations, use the [search example](../README.md#100-sources-one-integration) and [advanced usage](../docs/advanced.md). Keep API credentials in the server environment and use a persistent secret-manager key when enabling encrypted storage.

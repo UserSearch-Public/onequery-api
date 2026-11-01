@@ -18,9 +18,11 @@
   <a href="docs/advanced.md">Advanced usage</a>
 </p>
 
-## Three sources. One search.
+## 100+ sources. One integration.
 
-Choose your providers, pass your query, and let UserSearch bring the results together:
+OneQuery brings together over 100 data sources through one UserSearch integration. Choose the providers available for your search type, pass your query, and get their findings back together.
+
+This email example selects three providers:
 
 ```js
 import UserSearch from 'usersearch-sdk';
@@ -182,9 +184,9 @@ See [timeouts, progress, and cancellation](docs/advanced.md#timeouts-progress-an
 - [API reference](https://public-api.usersearch.ai/docs/) — endpoints, schemas, sources, and pricing behavior.
 - [Advanced usage](docs/advanced.md) — images, recovery, encrypted storage, and operational limits.
 - [Examples](examples/) — a balance check and a fully simulated search workflow.
-- [Changelog](CHANGELOG.md) — SDK changes and migration notes.
+- [Changelog](docs/CHANGELOG.md) — SDK changes and migration notes.
 - [Releases and compatibility](docs/releases.md) — installation, versioning, and supported runtimes.
-- [Contributing](CONTRIBUTING.md) — development commands and test requirements.
+- [Contributing](.github/CONTRIBUTING.md) — development commands and test requirements.
 
 For SDK issues, [open an issue](https://github.com/UserSearch-Public/usersearch-sdk-js/issues/new) with the SDK version, Node.js version, error code, and request ID. Do not attach credentials, result keys, or personal search data.
 

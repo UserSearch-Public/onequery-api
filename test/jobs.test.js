@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { UserSearch, SearchHandle } from '../index.js';
+import { UserSearch, SearchHandle } from 'usersearch-sdk';
 const ref = '5f0c7a3e-1b2d-4c3e-8f40-9a1b2c3d4e5f';
 const input = { type: 'email', query: 'example@example.com' };
 function store() {

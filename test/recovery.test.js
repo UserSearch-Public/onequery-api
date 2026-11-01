@@ -4,7 +4,7 @@ import { mkdtemp, readdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { randomBytes } from 'node:crypto';
-import { UserSearch, SearchHandle, PreparedSearch, EncryptedFileStore } from '../index.js';
+import { UserSearch, SearchHandle, PreparedSearch, EncryptedFileStore } from 'usersearch-sdk';
 const ref = '5f0c7a3e-1b2d-4c3e-8f40-9a1b2c3d4e5f';
 const key = Buffer.alloc(32, 1).toString('base64url');
 const result = { data: { ref, status: 'completed', results: { accounts: [{ display_name: 'Sensitive Example' }] } }, meta: { status: 200, requestId: 'test', retryAfterMs: null } };
