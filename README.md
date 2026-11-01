@@ -1,16 +1,56 @@
-# UserSearch SDK for Node.js
+<p align="center">
+  <a href="https://usersearch.com/product/onequery/">
+    <img src="docs/assets/usersearch-platform.png" alt="UserSearch — OneQuery" width="720">
+  </a>
+</p>
 
-**One API key. Multiple sources. A single integration.**
+<h1 align="center">One API key. One call. Multiple premium sources.</h1>
 
-Search usernames, email addresses, phone numbers, and images through the UserSearch API. The SDK handles authentication, submission retries, and polling, with TypeScript definitions and optional encrypted result storage.
+<p align="center">
+  The UserSearch SDK for JavaScript and TypeScript.<br>
+  Search across your selected data providers and get their findings back together.
+</p>
 
-[API reference](https://public-api.usersearch.ai/docs/) · [Examples](examples/) · [Advanced usage](docs/advanced.md) · [Changelog](CHANGELOG.md)
+<p align="center">
+  <a href="https://usersearch.com/product/onequery/">Explore OneQuery</a> ·
+  <a href="https://public-api.usersearch.ai/docs/">API reference</a> ·
+  <a href="examples/">Examples</a> ·
+  <a href="docs/advanced.md">Advanced usage</a>
+</p>
+
+## Three sources. One search.
+
+Choose your providers, pass your query, and let UserSearch bring the results together:
+
+```js
+import UserSearch from 'usersearch-sdk';
+
+const client = new UserSearch({ apiKey: process.env.USERSEARCH_API_KEY });
+
+const { data } = await client.search({
+  type: 'email',
+  query: 'person@example.com',
+  sources: ['predicta', 'epieos', 'osint'],
+});
+
+console.log(data.results);
+```
+
+**That is the integration.** One UserSearch key gives your application access to supported providers. Add or remove sources in the same request, and consume a shared result structure with source attribution.
+
+One SDK call handles submission and polling until the result is ready. You do not need to build a separate client for each provider.
+
+| One key | One integration | Results together |
+| --- | --- | --- |
+| Authenticate with UserSearch | Select multiple compatible providers in `sources` | Read findings and each provider’s outcome from the same response |
+
+Searches use account credits. Provider availability depends on the search type and API configuration. [Estimate the cost](#check-the-cost-first) before submitting if needed.
 
 > **Private preview · v0.2.0-beta.1**
 >
 > Available to repository collaborators. The package is not yet published to npm.
 
-## At a glance
+## Built for your application
 
 - **Multiple sources per search** — select providers explicitly or let the API choose compatible defaults.
 - **Cost checks before submission** — validate input and retrieve an estimate without starting a search.
@@ -39,38 +79,7 @@ For reproducible deployments, pin the Git URL to a reviewed commit or install a 
 
 Before making API calls, activate your UserSearch API key, register your server’s outbound IP, and set `USERSEARCH_API_KEY` in the server environment.
 
-## Quick start
-
-Save this example as `search.mjs` and run it with `node search.mjs`:
-
-```js
-import UserSearch from 'usersearch-sdk';
-
-const client = new UserSearch({
-  apiKey: process.env.USERSEARCH_API_KEY,
-});
-
-const input = {
-  type: 'email',
-  query: 'person@example.com',
-  sources: ['predicta', 'epieos'],
-};
-
-// Free: validate the request and estimate the total cost in cents.
-const { data: quote } = await client.cost(input);
-console.log('Estimated cost:', quote.cost, 'cents');
-
-// Paid: submit the search and wait for a completed or failed result.
-const { data: search, meta } = await client.search(input);
-
-console.log('Search status:', search.status);
-console.log('Source outcomes:', search.sources);
-console.log('Request ID:', meta.requestId);
-
-// Save search.results to your application's result store.
-```
-
-The example performs a real search when run with a valid key. Each `search()` call starts a new paid search; charges are final, including when a source fails. The cost estimate is advisory and is not a spending cap.
+Save the example above as `search.mjs` and run `node search.mjs`.
 
 For CommonJS:
 
@@ -79,6 +88,29 @@ const { UserSearch } = require('usersearch-sdk');
 ```
 
 **Try it without an API key:** clone this repository, run `npm ci`, then `npm run demo`. The [simulated demo](examples/demo.mjs) shows multiple sources, a partial failure, encrypted saving, and recovery without network calls or charges.
+
+## Choose your sources
+
+Use a single provider or several with the same method. For example, the email search above queries Predicta, Epieos, and OSINT Industries together. Omit `sources` to use the API’s defaults for your search type; an empty list is rejected.
+
+The current SDK supports **username, email, phone, and image** searches. See the [API reference](https://public-api.usersearch.ai/docs/) for supported provider combinations and current availability.
+
+## Check the cost first
+
+Cost estimation is optional and does not start a search. Using the same `client`:
+
+```js
+const input = {
+  type: 'email',
+  query: 'person@example.com',
+  sources: ['predicta', 'epieos', 'osint'],
+};
+
+const { data: quote } = await client.cost(input);
+console.log('Estimated cost:', quote.cost, 'cents');
+```
+
+Each `search()` call starts a new paid search; charges are final, including when a source fails. The cost estimate is advisory and is not a spending cap.
 
 ## Working with results
 
@@ -160,4 +192,4 @@ Verification covers runtime tests, TypeScript consumers, and installed-package i
 
 ## License
 
-Proprietary — `UNLICENSED`. This private preview does not grant an open-source license. The repository and npm publication status remain unchanged.
+Proprietary — `UNLICENSED`. This private preview does not grant an open-source license.
