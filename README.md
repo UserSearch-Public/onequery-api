@@ -40,9 +40,17 @@ console.log(data.results);
 
 One SDK call handles submission and polling until the result is ready. You do not need to build a separate client for each provider.
 
-| One key | One integration | Results together |
-| --- | --- | --- |
-| Authenticate with UserSearch | Select multiple compatible providers in `sources` | Read findings and each provider’s outcome from the same response |
+## How it works
+
+Your app sends one query. UserSearch asks your selected providers, brings their findings together, and returns a consistent result structure.
+
+<p align="center">
+  <a href="https://usersearch.com/product/onequery/">
+    <img src="docs/assets/onequery-how-it-works.png" alt="OneQuery workflow: your app sends one query, UserSearch searches multiple providers and normalises their results, then returns one combined response." width="936">
+  </a>
+</p>
+
+*OneQuery product illustration from [usersearch.com](https://usersearch.com/product/onequery/). For this SDK’s supported search types and providers, see [Choose your sources](#choose-your-sources); use the SDK example above for the actual request syntax.*
 
 Searches use account credits. Provider availability depends on the search type and API configuration. [Estimate the cost](#check-the-cost-first) before submitting if needed.
 
