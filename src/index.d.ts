@@ -1,7 +1,7 @@
 import type { Findings } from './findings.js';
 export * from './findings.js';
 export type SearchType = 'username' | 'email' | 'phone' | 'image';
-export type Source = 'predicta' | 'osint' | 'epieos' | 'behindtheemail' | 'findpiclocation' | 'geoseer' | 'facecheck' | 'camgirlfinder' | 'tineye';
+export type Source = 'predicta' | 'osintindustry' | 'epieos' | 'behindtheemail' | 'findpiclocation' | 'geoseer' | 'facecheck' | 'camgirlfinder' | 'tineye';
 export type SearchInput = ({ type: 'username' | 'email' | 'phone'; query: string; value?: never } | { type: 'username' | 'email' | 'phone'; value: string; query?: never } | { type: 'image'; image: string; value?: never } | { type: 'image'; value: string; image?: never }) & { sources?: Source[] };
 export interface RequestOptions { signal?: AbortSignal; requestTimeoutMs?: number; maxRetries?: number }
 export interface WaitOptions extends RequestOptions { timeoutMs?: number; pollIntervalMs?: number; onProgress?: (response: Response<SearchResult>) => void | Promise<void> }

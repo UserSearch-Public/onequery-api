@@ -2,7 +2,7 @@ import { UserSearch, EncryptedFileStore, type Account, type Breach, type ImageMa
 import type { SeenValue } from 'usersearch-sdk';
 async function compileOnly() {
 const client = new UserSearch({ apiKey: 'synthetic', fetch: async () => { throw new Error('Compile-only fixture'); }, resultStore: new EncryptedFileStore({ directory: './results', encryptionKey: new Uint8Array(32) }) });
-const result = await client.search({ type: 'email', value: 'person@example.com', sources: ['predicta'] });
+const result = await client.search({ type: 'email', value: 'person@example.com', sources: ['predicta', 'osintindustry'] });
 await client.runJob('job-id', undefined, { onProgress: update => { const status: string = update.data.status; void status; } });
 const account: Account | undefined = result.data.results.accounts?.[0];
 const name: string | undefined = account?.display_name;

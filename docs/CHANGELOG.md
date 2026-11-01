@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Correct the OSINT Industries source identifier to `osintindustry` in TypeScript declarations and README examples.
+
 ## 0.2.0-beta.1 — 2026-10-30
 
 Private preview, not published to npm.

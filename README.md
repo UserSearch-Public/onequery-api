@@ -32,7 +32,7 @@ const client = new UserSearch({ apiKey: process.env.USERSEARCH_API_KEY });
 const { data } = await client.search({
   type: 'email',
   query: 'person@example.com',
-  sources: ['predicta', 'epieos', 'osint'],
+  sources: ['predicta', 'epieos', 'osintindustry'],
 });
 
 console.log(data.results);
@@ -113,7 +113,7 @@ Cost estimation is optional and does not start a search. Using the same `client`
 const input = {
   type: 'email',
   query: 'person@example.com',
-  sources: ['predicta', 'epieos', 'osint'],
+  sources: ['predicta', 'epieos', 'osintindustry'],
 };
 
 const { data: quote } = await client.cost(input);
