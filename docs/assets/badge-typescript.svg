@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="26" role="img" aria-label="SDK: JS + TypeScript">
+  <title>SDK: JS + TypeScript</title>
+  <clipPath id="round"><rect width="150" height="26" rx="5"/></clipPath>
+  <g clip-path="url(#round)">
+    <path fill="#202833" d="M0 0h40v26H0z"/>
+    <path fill="#ff6339" d="M40 0h110v26H40z"/>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="middle">
+    <text x="20" y="17" fill="#ffffff">SDK</text>
+    <text x="95" y="17" fill="#151515" font-weight="600">JS + TypeScript</text>
+  </g>
+</svg>

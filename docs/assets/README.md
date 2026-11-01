@@ -1,5 +1,7 @@
 # UserSearch brand assets
 
+The `badge-*.svg` files are repository-native badges in UserSearch colours. They describe product coverage, language support, supported Node.js versions and beta status; they are not live service-health indicators.
+
 These assets are copied from the official [UserSearch OneQuery page](https://usersearch.com/product/onequery/):
 
 - `usersearch-platform.png`: the page’s [social sharing image](https://usersearch.com/og-image.png), including the UserSearch logo on its original dark background. Used as the SDK README banner so the branding remains legible in light and dark GitHub themes.

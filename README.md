@@ -4,23 +4,31 @@
   </a>
 </p>
 
-<h1 align="center">One API key. One call. Multiple premium sources.</h1>
+<h1 align="center">Search premium data sources with one API key.</h1>
 
 <p align="center">
-  The UserSearch SDK for JavaScript and TypeScript.<br>
-  Search multiple data providers with one UserSearch API key.
+  The UserSearch OneQuery SDK for JavaScript and TypeScript.<br>
+  Choose your providers, send a query, and get their results in a common format.
 </p>
 
 <p align="center">
-  <a href="https://usersearch.com/product/onequery/">Explore OneQuery</a> ·
+  <a href="#installation"><strong>Install</strong></a> ·
+  <a href="https://usersearch.ai/m/auth/login"><strong>Get API access</strong></a> ·
+  <a href="#how-it-works">How it works</a> ·
   <a href="https://public-api.usersearch.ai/docs/">API reference</a> ·
-  <a href="examples/">Examples</a> ·
-  <a href="docs/advanced.md">Advanced usage</a>
+  <a href="examples/">Examples</a>
 </p>
 
-## 100+ sources. One integration.
+<p align="center">
+  <a href="https://usersearch.com/product/onequery/"><img src="docs/assets/badge-sources.svg" alt="OneQuery: 100+ data sources" height="26"></a>
+  <a href="#installation"><img src="docs/assets/badge-typescript.svg" alt="JavaScript and TypeScript" height="26"></a>
+  <a href="#installation"><img src="docs/assets/badge-node.svg" alt="Node.js 22.13+ or 24" height="26"></a>
+  <a href="docs/releases.md"><img src="docs/assets/badge-beta.svg" alt="SDK status: beta" height="26"></a>
+</p>
 
-UserSearch OneQuery connects your application to over 100 data sources. Choose the providers you want to search using a single API key.
+OneQuery brings together over 100 data sources. This SDK supports username, email, phone, and image searches, with more search types coming soon.
+
+## Search example
 
 This email example selects three providers:
 
@@ -38,7 +46,7 @@ const { data } = await client.search({
 console.log(data.results);
 ```
 
-`search()` submits the query and waits for the results. Add or remove providers in `sources`; the SDK handles polling, and results retain their source attribution.
+`search()` submits the query and waits for the results. Add or remove providers in `sources`; the SDK handles polling. Each result shows which provider it came from.
 
 ## How it works
 
@@ -51,33 +59,6 @@ UserSearch queries the selected providers and combines their responses into a co
 </p>
 
 *OneQuery product overview. See [Search types](#search-types) for current SDK support and use the code above for request syntax.*
-
-## Search types
-
-SDK support for the [UserSearch search types](https://usersearch.com/product/onequery/):
-
-| Search type | Input | SDK status |
-| --- | --- | --- |
-| Username Intelligence | A username or handle | Available |
-| Email Intelligence | An email address | Available |
-| Phone Intelligence | A number with an international country code, such as `+442079460000` | Available |
-| Picture / Image | A supported image encoded as a base64 data URI | Available |
-| People Intelligence | To be announced | Coming soon |
-| Corporate Intelligence | To be announced | Coming soon |
-| Cyber Intelligence | To be announced | Coming soon |
-| IP Intelligence | To be announced | Coming soon |
-| Product Intelligence | To be announced | Coming soon |
-| Chat Messaging | To be announced | Coming soon |
-| Public Forums | To be announced | Coming soon |
-| Cryptocurrency | To be announced | Coming soon |
-| Vehicle Lookup | To be announced | Coming soon |
-| Threat Intelligence | To be announced | Coming soon |
-| Wireless Device | To be announced | Coming soon |
-| Domain Intelligence | To be announced | Coming soon |
-| Breach Exposure | To be announced | Coming soon |
-| Court Records | To be announced | Coming soon |
-
-Input formats for upcoming search types will be documented when they are released.
 
 ## Installation
 
@@ -102,6 +83,33 @@ const { UserSearch } = require('usersearch-sdk');
 ```
 
 To try it without an API key, clone the repository and run `npm ci` followed by `npm run demo`. The [demo](examples/demo.mjs) uses simulated responses and spends no credits.
+
+## Search types
+
+SDK support for the [UserSearch search types](https://usersearch.com/product/onequery/):
+
+| Search type | Input | SDK status |
+| --- | --- | --- |
+| Username Intelligence | A username or handle | Available |
+| Email Intelligence | An email address | Available |
+| Phone Intelligence | A number with an international country code, such as `+442079460000` | Available |
+| Picture / Image | A supported image encoded as a base64 data URI | Available |
+| People Intelligence | — | Coming soon |
+| Corporate Intelligence | — | Coming soon |
+| Cyber Intelligence | — | Coming soon |
+| IP Intelligence | — | Coming soon |
+| Product Intelligence | — | Coming soon |
+| Chat Messaging | — | Coming soon |
+| Public Forums | — | Coming soon |
+| Cryptocurrency | — | Coming soon |
+| Vehicle Lookup | — | Coming soon |
+| Threat Intelligence | — | Coming soon |
+| Wireless Device | — | Coming soon |
+| Domain Intelligence | — | Coming soon |
+| Breach Exposure | — | Coming soon |
+| Court Records | — | Coming soon |
+
+Input formats for upcoming search types will be documented when they are released.
 
 ## Choose your sources
 
@@ -128,7 +136,26 @@ Each `search()` call starts a new paid search; charges are final, including when
 
 ## Working with results
 
-Network methods return `{ data, meta }`:
+Network methods return `{ data, meta }`. For example, `data.results` can contain accounts found by different providers:
+
+```json
+{
+  "accounts": [
+    {
+      "platform": "example-forum",
+      "username": "sample-user",
+      "sources": ["predicta", "osintindustry"]
+    },
+    {
+      "platform": "example-community",
+      "username": "sample-user",
+      "sources": ["epieos"]
+    }
+  ]
+}
+```
+
+This is a fictional, shortened example. Fields depend on what the providers find.
 
 | Field | Contents |
 | --- | --- |

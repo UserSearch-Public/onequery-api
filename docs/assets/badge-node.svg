@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="155" height="26" role="img" aria-label="Node.js: 22.13+ / 24">
+  <title>Node.js: 22.13+ / 24</title>
+  <clipPath id="round"><rect width="155" height="26" rx="5"/></clipPath>
+  <g clip-path="url(#round)">
+    <path fill="#202833" d="M0 0h65v26H0z"/>
+    <path fill="#ff6339" d="M65 0h90v26H65z"/>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="middle">
+    <text x="32.5" y="17" fill="#ffffff">Node.js</text>
+    <text x="110" y="17" fill="#151515" font-weight="600">22.13+ / 24</text>
+  </g>
+</svg>

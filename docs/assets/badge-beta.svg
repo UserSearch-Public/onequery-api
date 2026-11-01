@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="98" height="26" role="img" aria-label="Status: Beta">
+  <title>Status: Beta</title>
+  <clipPath id="round"><rect width="98" height="26" rx="5"/></clipPath>
+  <g clip-path="url(#round)">
+    <path fill="#202833" d="M0 0h54v26H0z"/>
+    <path fill="#ff6339" d="M54 0h44v26H54z"/>
+  </g>
+  <g font-family="Arial,Helvetica,sans-serif" font-size="12" text-anchor="middle">
+    <text x="27" y="17" fill="#ffffff">Status</text>
+    <text x="76" y="17" fill="#151515" font-weight="600">Beta</text>
+  </g>
+</svg>
