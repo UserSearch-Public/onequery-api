@@ -1,24 +1,14 @@
-# UserSearch brand assets
+# Brand assets
 
-The `badge-*.svg` files are repository-native badges in UserSearch colours. They describe product coverage, language support, supported Node.js versions and beta status; they are not live service-health indicators.
+The SDK’s MIT licence covers the `badge-*.svg` files. They describe product coverage, language support, supported Node.js versions and beta status.
 
-These assets are copied from the official [UserSearch OneQuery page](https://usersearch.com/product/onequery/):
+The following logos and website images are excluded from the MIT licence:
 
-- `usersearch-platform.png`: the page’s [social sharing image](https://usersearch.com/og-image.png), including the UserSearch logo on its original dark background. Retained as the source for the OneQuery API banner.
-- `usersearch-logo.png`: the [original footer logo](https://usersearch.com/assets/logo-dark-320-DtmV7bfX2T.png), intended for dark backgrounds.
+| File | Source |
+| --- | --- |
+| `usersearch-platform.png` | [UserSearch website sharing image](https://usersearch.com/og-image.png) |
+| `usersearch-logo.png` | [UserSearch website logo](https://usersearch.com/assets/logo-dark-320-DtmV7bfX2T.png) |
+| `onequery-how-it-works.png` | Diagram captured from the [OneQuery product page](https://usersearch.com/product/onequery/) |
+| `usersearch-onequery-api.png` | UserSearch OneQuery API banner adapted from the website branding |
 
-- `onequery-how-it-works.png`: a 2× resolution browser capture of the original `.oq-flow` diagram under “How it works” on the OneQuery page. The page renders the diagram using HTML/CSS; it is captured as a PNG for GitHub. This is a product illustration, not the SDK API contract.
-
-Downloaded or captured on 2026-11-01. The original artwork is unchanged. The three PNG files listed above (logos and website imagery) are excluded from the SDK’s MIT licence. UserSearch branding remains the property of UserSearch; provider marks belong to their respective owners. No trademark rights are granted. The repository-native `badge-*.svg` files are covered by the SDK’s MIT licence.
-
-## OneQuery API banner
-
-`usersearch-onequery-api.png` is the README banner, adapted from `usersearch-platform.png` using the built-in image generation tool on 2026-11-01. The current revision uses a smaller blue product name and a tighter canvas. Its README display width preserves approximately the previous visible UserSearch wordmark size while reducing the overall banner height. It is a brand asset excluded from the MIT licence on the same terms as the original logo.
-
-Initial prompt:
-
-> Edit this existing UserSearch logo banner for the OneQuery API GitHub README. Preserve the existing orange logo symbol and USERSEARCH wordmark, spelling and white/orange colours. Add exactly "OneQuery API" as a second line below the USERSEARCH wordmark, centred, in a clean modern sans-serif font, white with API in the existing orange. Keep the flat near-black background. Professional minimal brand lockup, crisp text, ample but not excessive spacing. No extra slogans, decoration, gradients or additional text. Wide landscape banner.
-
-Revision prompt:
-
-> Edit this exact banner. Keep the USERSEARCH wordmark and orange symbol unchanged in design, colours and size: the full symbol-plus-wordmark should remain approximately 1160 pixels wide, as in the reference. Make the secondary text "OneQuery API" much smaller, approximately 42 pixels high (less than half the main wordmark letter height), in a single muted light blue colour #8CB9D9, centred beneath the main logo with a 30 pixel gap. Remove the excessive black padding by using a tightly framed wide canvas approximately 1280 by 432 pixels. Preserve the main logo size; trim the canvas rather than enlarging or shrinking the logo. Flat near-black background. Compact professional logo lockup. No additional words, decorations or effects.
+UserSearch branding belongs to UserSearch. Provider marks belong to their respective owners. No trademark rights are granted.
