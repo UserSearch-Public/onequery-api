@@ -1,94 +1,163 @@
-# UserSearch Node.js SDK
+# UserSearch SDK for Node.js
 
-Search usernames, emails, phone numbers and images across multiple sources with one API key. Server-side JavaScript and TypeScript, Node.js **22.13+ or 24**. No runtime dependencies.
+**One API key. Multiple sources. A single integration.**
 
-**Private preview — 0.2.0-beta.1.** This repository and package remain private. Nothing is published to npm. API charges still apply when you submit a real search.
+Search usernames, email addresses, phone numbers, and images through the UserSearch API. The SDK handles authentication, submission retries, and polling, with TypeScript definitions and optional encrypted result storage.
 
-## Install
+[API reference](https://public-api.usersearch.ai/docs/) · [Examples](examples/) · [Advanced usage](docs/advanced.md) · [Changelog](CHANGELOG.md)
 
-Repository collaborators can clone this private repository, run `npm ci`, and then install the local folder in their application:
+> **Private preview · v0.2.0-beta.1**
+>
+> Available to repository collaborators. The package is not yet published to npm.
+
+## At a glance
+
+- **Multiple sources per search** — select providers explicitly or let the API choose compatible defaults.
+- **Cost checks before submission** — validate input and retrieve an estimate without starting a search.
+- **Consistent results** — retain source attribution, partial results, and individual provider outcomes.
+- **Recoverable submissions** — retries reuse the same result and idempotency keys.
+- **JavaScript and TypeScript** — ES modules and CommonJS, with no runtime dependencies.
+
+| Search type | Input |
+| --- | --- |
+| Username | A username or handle |
+| Email | An email address |
+| Phone | A number with an international country code, such as `+442079460000` |
+| Image | A supported image encoded as a base64 data URI |
+
+**Runtime:** Node.js 22.13+ in the 22 series, or Node.js 24. Tested on Windows and Linux. This is a server-side SDK; browser use is not supported.
+
+## Installation
+
+Install from the private GitHub repository using an account with access:
 
 ```sh
-npm install /path/to/usersearch-sdk-js
+npm install git+https://github.com/UserSearch-Public/usersearch-sdk-js.git
 ```
 
-For a pinned preview, run `npm pack` in the SDK folder and install the resulting `.tgz`. Neither command publishes anything. See [release preparation](docs/releases.md).
+For reproducible deployments, pin the Git URL to a reviewed commit or install a versioned tarball. See [installation and releases](docs/releases.md).
+
+Before making API calls, activate your UserSearch API key, register your server’s outbound IP, and set `USERSEARCH_API_KEY` in the server environment.
 
 ## Quick start
+
+Save this example as `search.mjs` and run it with `node search.mjs`:
 
 ```js
 import UserSearch from 'usersearch-sdk';
 
-const client = new UserSearch({ apiKey: process.env.USERSEARCH_API_KEY });
+const client = new UserSearch({
+  apiKey: process.env.USERSEARCH_API_KEY,
+});
+
 const input = {
   type: 'email',
   query: 'person@example.com',
-  sources: ['predicta', 'epieos']
+  sources: ['predicta', 'epieos'],
 };
 
-const quote = await client.cost(input); // Free; amounts are integer cents.
-console.log(quote.data.cost);
+// Free: validate the request and estimate the total cost in cents.
+const { data: quote } = await client.cost(input);
+console.log('Estimated cost:', quote.cost, 'cents');
 
-const response = await client.search(input); // Paid; submits and polls.
-console.log(response.data.results);
-console.log(response.data.sources); // Each source's status and attribution.
-console.log(response.meta.requestId);
+// Paid: submit the search and wait for a completed or failed result.
+const { data: search, meta } = await client.search(input);
+
+console.log('Search status:', search.status);
+console.log('Source outcomes:', search.sources);
+console.log('Request ID:', meta.requestId);
+
+// Save search.results to your application's result store.
 ```
 
-CommonJS is also supported: `const { UserSearch } = require('usersearch-sdk')`.
-The account key must be activated and locked to your server's public outbound IP. Keep it out of browser code. Phone queries require a country code, e.g. `+442079460000`. Image queries use an `image` data URI. Omit `sources` to use API defaults; an empty list is rejected.
+The example performs a real search when run with a valid key. Each `search()` call starts a new paid search; charges are final, including when a source fails. The cost estimate is advisory and is not a spending cap.
 
-Every call to `search()` starts a new search. Charges are final, including failed sources. Cost estimates are advisory, not spending caps. Results are returned as `{ data, meta }`; `meta` contains HTTP `status`, `requestId` and `retryAfterMs`. Partial or total source failures are result data, not request exceptions.
-
-## Errors and request settings
+For CommonJS:
 
 ```js
-import { RateLimitError, UserSearchError } from 'usersearch-sdk';
-
-try {
-  await client.balance({ requestTimeoutMs: 10000, maxRetries: 0 });
-} catch (error) {
-  if (error instanceof RateLimitError) console.log(error.retryAfterMs);
-  if (error instanceof UserSearchError) console.error(error.toJSON());
-}
+const { UserSearch } = require('usersearch-sdk');
 ```
 
-Error classes include `AuthenticationError`, `PermissionError`, `InvalidRequestError`, `RateLimitError`, `APIError`, `ConnectionError`, and `DeliveryUncertainError`. They extend `UserSearchError` and retain API codes, charge state, request IDs and troubleshooting hints. `toJSON()` returns diagnostic fields without response bodies or recovery secrets. Local input validation can throw `TypeError`; cancellation can throw an abort error.
+**Try it without an API key:** clone this repository, run `npm ci`, then `npm run demo`. The [simulated demo](examples/demo.mjs) shows multiple sources, a partial failure, encrypted saving, and recovery without network calls or charges.
 
-Client defaults: `timeoutMs: 30000` per HTTP attempt and `maxRetries: 2`. Request methods accept `requestTimeoutMs`, `maxRetries` and `signal`. `search`/`wait` also accept a polling `timeoutMs` (default five minutes), `pollIntervalMs` and `onProgress`. Use a signal to bound the complete submission-and-polling workflow. Automatic retries reuse the exact submission keys and honor `Retry-After`. Collection never automatically retries an ambiguous response loss. `wait` retries explicit polling rate limits until its deadline, independent of submission `maxRetries`.
+## Working with results
 
-## Optional recovery and storage
+Network methods return `{ data, meta }`:
 
-The API delivers finished results once. The SDK caches them on the handle, but applications should persist them. Optional encrypted storage is available separately:
+| Field | Contents |
+| --- | --- |
+| `data.results` | Findings returned by a search |
+| `data.sources` | Each source’s status, including failures |
+| `meta.requestId` | Request identifier for support and diagnostics |
+| `meta.status` | HTTP response status |
+| `meta.retryAfterMs` | Suggested retry delay in milliseconds, or `null` |
+
+One source failing does not discard another source’s findings. Inspect `data.sources` as well as the overall search status. Search results are returned normally even when every source fails.
+
+> **Results are delivered once.**
+>
+> Save the terminal response when you receive it. The SDK caches it on the search handle; optional [encrypted storage and job recovery](docs/advanced.md#encrypted-storage) preserve results across application restarts.
+
+## Client methods
+
+| Method | Purpose |
+| --- | --- |
+| `health()` | Read API and source health |
+| `balance()` | Read the account balance in cents |
+| `cost(input)` | Validate and estimate a search without submitting it |
+| `search(input, options)` | Submit a new search and wait for its result |
+| `prepare(input)` → `submit(prepared)` | Control submission and preserve retry credentials |
+| `results(handle)` / `wait(handle)` | Collect once or poll until the search finishes |
+| `runJob(jobId, input, options)` | Start or resume a job using configured persistent storage |
+
+Omit `sources` to use API defaults. An empty source list is rejected. Provider availability and accepted image constraints are determined by the API.
+
+## Errors and configuration
 
 ```js
-import { EncryptedFileStore } from 'usersearch-sdk/storage';
+import UserSearch, { UserSearchError } from 'usersearch-sdk';
 
 const client = new UserSearch({
   apiKey: process.env.USERSEARCH_API_KEY,
-  resultStore: new EncryptedFileStore({
-    directory: './private-results',
-    encryptionKey: Buffer.from(process.env.USERSEARCH_STORAGE_KEY, 'base64')
-  })
+  timeoutMs: 30_000,
+  maxRetries: 2,
 });
-const response = await client.runJob('stable-application-job-id', input);
-// Resume after a restart with the same credentials/storage:
-// await client.runJob('stable-application-job-id');
+
+try {
+  await client.balance({ requestTimeoutMs: 10_000, maxRetries: 0 });
+} catch (error) {
+  if (!(error instanceof UserSearchError)) throw error;
+  console.error(error.toJSON());
+}
 ```
 
-Keep the separate random 32-byte storage key in a secret manager. Read [advanced recovery](docs/advanced.md) for storage failures, stale locks, cancellation and the unavoidable read-once delivery crash window.
+Errors expose a machine-readable code, request ID, charge state, and an actionable hint. Specific classes distinguish authentication, permissions, invalid input, rate limits, API failures, connection errors, and uncertain result delivery.
+
+Retries preserve submission identity and honor `Retry-After`. An ambiguous result-collection failure is never retried automatically because the API may already have delivered and deleted the response.
+
+See [timeouts, progress, and cancellation](docs/advanced.md#timeouts-progress-and-cancellation) for request overrides and polling controls.
+
+## Documentation and support
+
+- [API reference](https://public-api.usersearch.ai/docs/) — endpoints, schemas, sources, and pricing behavior.
+- [Advanced usage](docs/advanced.md) — images, recovery, encrypted storage, and operational limits.
+- [Examples](examples/) — a balance check and a fully simulated search workflow.
+- [Changelog](CHANGELOG.md) — SDK changes and migration notes.
+- [Releases and compatibility](docs/releases.md) — installation, versioning, and supported runtimes.
+- [Contributing](CONTRIBUTING.md) — development commands and test requirements.
+
+For SDK issues, [open an issue](https://github.com/UserSearch-Public/usersearch-sdk-js/issues/new) with the SDK version, Node.js version, error code, and request ID. Do not attach credentials, result keys, or personal search data.
 
 ## Development
 
 ```sh
 npm ci
-npm run verify         # Syntax, runtime tests, TypeScript and installed-package checks
-npm run demo           # Fully simulated: no key, network calls or charges
-npm run check:contract # Public specification only; no API key or provider query
+npm run verify
+npm run demo
 ```
 
-GitHub CI runs verification on Windows/Linux with Node 22.13 and 24. Manual workflows check API drift and prepare a private tarball artifact. No workflow publishes to npm. TypeScript declarations are currently maintained alongside JavaScript and checked by consumer tests; they are not generated from implementation source.
+Verification covers runtime tests, TypeScript consumers, and installed-package imports. GitHub Actions checks Windows and Linux on Node.js 22.13 and 24. The optional `npm run check:contract` command checks the public API specification for changes.
 
-See [CHANGELOG.md](CHANGELOG.md), [release policy](docs/releases.md), [contributing](CONTRIBUTING.md), and [API documentation](https://public-api.usersearch.ai/docs/). SDK versions are independent of API versions; this API has no client-selectable version header. The SDK does not invent one.
+## License
 
-This software remains proprietary (`UNLICENSED`) pending an explicit distribution/licensing decision. Report private issues through this repository; never attach API keys, result keys or real search results.
+Proprietary — `UNLICENSED`. This private preview does not grant an open-source license. The repository and npm publication status remain unchanged.

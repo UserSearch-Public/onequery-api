@@ -1,4 +1,6 @@
-# SDK review
+# Implementation review notes
+
+Maintainer reference. User-facing recovery behavior and limitations are documented in docs/advanced.md.
 
 This is a separate review pass by the implementation agent, not an external independent security audit. The review examined retry identity, cancellation, read-once delivery, encrypted storage, shared caches, job recovery and packaging.
 

@@ -1,4 +1,6 @@
-# SDK plan and review
+# Initial implementation plan (historical)
+
+Maintainer reference from the first local prototype. Current installation, support, and release information is in the README and docs directory.
 
 ## Plan
 
